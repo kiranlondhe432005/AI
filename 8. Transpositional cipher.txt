@@ -1,0 +1,80 @@
+# Experiment No. 2
+# Transposition Technique
+# 1. Rail Fence Cipher
+# 2. Simple Columnar Transposition
+# 3. Double Columnar Transposition
+
+
+# ---------------- RAIL FENCE CIPHER ----------------
+
+def rail_encrypt(text):
+    even = text[::2]
+    odd = text[1::2]
+    return even + odd
+
+
+def rail_decrypt(cipher):
+    mid = (len(cipher) + 1) // 2
+
+    even = cipher[:mid]
+    odd = cipher[mid:]
+
+    text = ""
+
+    for i in range(len(odd)):
+        text += even[i] + odd[i]
+
+    if len(even) > len(odd):
+        text += even[-1]
+
+    return text
+
+
+# ---------------- SIMPLE COLUMNAR ----------------
+
+def columnar_encrypt(text, key):
+    col = len(key)
+
+    while len(text) % col != 0:
+        text += 'X'
+
+    cipher = ""
+
+    for i in range(col):
+        pointer = i
+
+        while pointer < len(text):
+            cipher += text[pointer]
+            pointer += col
+
+    return cipher
+
+
+# ---------------- MAIN PROGRAM ----------------
+
+print("----- TRANSPOSITION TECHNIQUES -----")
+
+text = input("Enter Plain Text: ").replace(" ", "").upper()
+key = input("Enter Key: ").upper()
+
+
+# Rail Fence
+rail_cipher = rail_encrypt(text)
+
+print("\n--- Rail Fence Cipher ---")
+print("Encrypted Text:", rail_cipher)
+print("Decrypted Text:", rail_decrypt(rail_cipher))
+
+
+# Simple Columnar
+simple_cipher = columnar_encrypt(text, key)
+
+print("\n--- Simple Columnar Transposition ---")
+print("Encrypted Text:", simple_cipher)
+
+
+# Double Columnar
+double_cipher = columnar_encrypt(simple_cipher, key)
+
+print("\n--- Double Columnar Transposition ---")
+print("Encrypted Text:", double_cipher)

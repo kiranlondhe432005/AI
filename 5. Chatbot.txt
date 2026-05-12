@@ -1,0 +1,74 @@
+# Simple Chatbot Program
+
+print("===== Welcome to Simple Chatbot =====")
+print("Type 'bye' to stop chatting\n")
+
+name = input("Enter your name: ")
+
+print("\nHello", name, "! How can I help you?\n")
+
+while True:
+
+    user = input("You: ").lower()
+
+    # Exit condition
+    if user == "bye":
+        print("Chatbot: Goodbye", name, "!")
+        break
+
+    # Greetings
+    elif user == "hello" or user == "hi":
+        print("Chatbot: Hello! Nice to meet you.")
+
+    # Asking name
+    elif "your name" in user:
+        print("Chatbot: My name is AI Chatbot.")
+
+    # Asking about user
+    elif "how are you" in user:
+        print("Chatbot: I am fine. Thank you!")
+
+    # College related
+    elif "college" in user:
+        print("Chatbot: I can help with college information.")
+
+    # Course related
+    elif "course" in user:
+        print("Chatbot: Many courses are available like AI, DSBDA, CNS, etc.")
+
+    # Help
+    elif "help" in user:
+        print("Chatbot: I can answer simple questions.")
+
+    # Time
+    elif "time" in user:
+        from datetime import datetime
+
+        current_time = datetime.now().strftime("%H:%M:%S")
+
+        print("Chatbot: Current time is", current_time)
+
+    # Default reply
+    else:
+        print("Chatbot: Sorry, I did not understand.")
+
+
+/*
+===== Welcome to Simple Chatbot =====
+Type 'bye' to stop chatting
+
+Enter your name: sakshi
+
+Hello sakshi ! How can I help you?
+
+You: Hi
+Chatbot: Hello! Nice to meet you.
+You: How Are You
+Chatbot: I am fine. Thank you!
+You: What is Your name
+Chatbot: My name is AI Chatbot.
+You: bye
+Chatbot: Goodbye sakshi !
+
+=== Code Execution Successful ===
+*/

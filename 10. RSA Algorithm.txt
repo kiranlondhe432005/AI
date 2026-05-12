@@ -1,0 +1,33 @@
+# Experiment No. 4
+# RSA Algorithm Implementation
+
+# Input two prime numbers
+p = int(input("Enter first prime number: "))
+q = int(input("Enter second prime number: "))
+
+# Calculate n
+n = p * q
+
+# Calculate phi
+phi = (p - 1) * (q - 1)
+
+# Choose e
+e = int(input("Enter value of e: "))
+
+# Find d
+k = 2
+d = (k * phi + 1) // e
+
+print("\nPublic Key = (", e, ",", n, ")")
+print("Private Key = (", d, ",", n, ")")
+
+# Message input
+msg = int(input("\nEnter message(number): "))
+
+# Encryption
+c = (msg ** e) % n
+print("Encrypted Message:", c)
+
+# Decryption
+m = (c ** d) % n
+print("Decrypted Message:", m)

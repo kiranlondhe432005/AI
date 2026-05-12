@@ -1,0 +1,135 @@
+# Simple A* Algorithm
+
+# Create graph
+graph = {}
+heuristic = {}
+
+# Number of nodes
+n = int(input("Enter number of nodes: "))
+
+# Input heuristic values
+print("\nEnter heuristic values:")
+
+for i in range(n):
+    node = input("Enter node name: ")
+    h = int(input(f"Enter heuristic value for {node}: "))
+
+    heuristic[node] = h
+    graph[node] = []
+
+# Number of edges
+e = int(input("\nEnter number of edges: "))
+
+print("\nEnter edges with cost (Example: A B 4)")
+
+for i in range(e):
+    u, v, cost = input().split()
+    cost = int(cost)
+
+    graph[u].append((v, cost))
+    graph[v].append((u, cost))   # Undirected graph
+
+
+# A* Function
+def astar(start, goal):
+
+    open_list = [start]
+    closed_list = []
+
+    g = {start: 0}
+
+    parent = {start: start}
+
+    while open_list:
+
+        current = open_list[0]
+
+        # Find minimum f(n)
+        for node in open_list:
+            if g[node] + heuristic[node] < g[current] + heuristic[current]:
+                current = node
+
+        # Goal found
+        if current == goal:
+
+            path = []
+
+            while parent[current] != current:
+                path.append(current)
+                current = parent[current]
+
+            path.append(start)
+            path.reverse()
+
+            print("\nShortest Path is:")
+            print(" -> ".join(path))
+
+            print("Total Cost =", g[goal])
+            return
+
+        # Explore neighbours
+        for neighbour, cost in graph[current]:
+
+            new_cost = g[current] + cost
+
+            if neighbour not in open_list and neighbour not in closed_list:
+
+                open_list.append(neighbour)
+                g[neighbour] = new_cost
+                parent[neighbour] = current
+
+            elif new_cost < g.get(neighbour, 9999):
+
+                g[neighbour] = new_cost
+                parent[neighbour] = current
+
+        open_list.remove(current)
+        closed_list.append(current)
+
+    print("Path not found")
+
+
+# Main Program
+print("\nNodes are:", list(graph.keys()))
+
+start = input("\nEnter start node: ")
+goal = input("Enter goal node: ")
+
+astar(start, goal)
+
+
+/*
+Enter number of nodes: 5
+
+Enter heuristic values:
+Enter node name: A
+Enter heuristic value for A: 7
+Enter node name: B
+Enter heuristic value for B: 6
+Enter node name: C
+Enter heuristic value for C: 2
+Enter node name: D
+Enter heuristic value for D: 1
+Enter node name: G
+Enter heuristic value for G: 0
+
+Enter number of edges: 5
+
+Enter edges with cost (Example: A B 4)
+A B 1
+A C 4
+B D 2
+C G 5
+D G 1
+
+Nodes are: ['A', 'B', 'C', 'D', 'G']
+
+Enter start node: A
+Enter goal node: G
+
+Shortest Path is:
+A -> B -> D -> G
+Total Cost = 4
+
+=== Code Execution Successful ===
+*/

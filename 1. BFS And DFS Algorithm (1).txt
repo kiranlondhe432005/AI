@@ -1,0 +1,100 @@
+# DFS and BFS Program using Undirected Graph
+
+# Create graph using dictionary
+graph = {}
+
+# Function to add edges
+def add_edge(u, v):
+    if u not in graph:
+        graph[u] = []
+
+    if v not in graph:
+        graph[v] = []
+
+    graph[u].append(v)
+    graph[v].append(u)
+
+
+# DFS Function (Recursive)
+def dfs(node, visited):
+    visited.add(node)
+    print(node, end=" ")
+
+    for neighbour in graph[node]:
+        if neighbour not in visited:
+            dfs(neighbour, visited)
+
+
+# BFS Function
+def bfs(start):
+    visited = []
+    queue = []
+
+    visited.append(start)
+    queue.append(start)
+
+    while queue:
+        node = queue.pop(0)
+        print(node, end=" ")
+
+        for neighbour in graph[node]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+
+# -------- MAIN PROGRAM --------
+
+# Number of edges
+edges = int(input("Enter number of edges: "))
+
+print("Enter edges (Example: A B)")
+
+for i in range(edges):
+    u, v = input().split()
+    add_edge(u, v)
+
+# Display graph
+print("\nGraph is:")
+for node in graph:
+    print(node, "->", graph[node])
+
+# Starting node
+start = input("\nEnter starting node: ")
+
+# DFS Traversal
+print("\nDepth First Search (DFS):")
+visited = set()
+dfs(start, visited)
+
+# BFS Traversal
+print("\n\nBreadth First Search (BFS):")
+bfs(start)
+
+
+
+/*
+Enter number of edges: 5
+Enter edges (Example: A B)
+A B
+A C
+B D
+C E
+D E
+
+Graph is:
+A -> ['B', 'C']
+B -> ['A', 'D']
+C -> ['A', 'E']
+D -> ['B', 'E']
+E -> ['C', 'D']
+
+Enter starting node: A
+
+Depth First Search (DFS):
+A B D E C 
+
+Breadth First Search (BFS):
+A B C D E 
+=== Code Execution Successful ===
+*/

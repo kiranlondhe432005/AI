@@ -1,0 +1,72 @@
+# Prim's Minimum Spanning Tree Algorithm
+
+# Number of vertices
+n = int(input("Enter number of vertices: "))
+
+# Create adjacency matrix
+graph = []
+
+print("\nEnter adjacency matrix:")
+
+for i in range(n):
+    row = list(map(int, input().split()))
+    graph.append(row)
+
+selected = [False] * n
+
+# First vertex selected
+selected[0] = True
+
+print("\nEdges in Minimum Spanning Tree:")
+
+edge_count = 0
+total_cost = 0
+
+while edge_count < n - 1:
+
+    minimum = 9999
+    x = 0
+    y = 0
+
+    for i in range(n):
+
+        if selected[i]:
+
+            for j in range(n):
+
+                # Select minimum edge
+                if (not selected[j]) and graph[i][j]:
+
+                    if minimum > graph[i][j]:
+                        minimum = graph[i][j]
+                        x = i
+                        y = j
+
+    print(x, "--", y, "=", graph[x][y])
+
+    total_cost = total_cost + graph[x][y]
+
+    selected[y] = True
+    edge_count += 1
+
+print("\nTotal Cost =", total_cost)
+
+
+/*
+Enter number of vertices: 4
+
+Enter adjacency matrix:
+0 2 0 6
+2 0 3 8
+0 3 0 0
+6 8 0 0
+
+Edges in Minimum Spanning Tree:
+0 -- 1 = 2
+1 -- 2 = 3
+0 -- 3 = 6
+
+Total Cost = 11
+
+=== Code Execution Successful ===
+*/

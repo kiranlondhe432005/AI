@@ -1,0 +1,18 @@
+text = "Hello "
+
+and_result = ""
+or_result = ""
+xor_result = ""
+
+for ch in text:
+    and_result += chr(ord(ch) & 127)
+
+    # OR ASCII values
+    or_result += str(ord(ch) | 127) + " "
+
+    # XOR ASCII values
+    xor_result += str(ord(ch) ^ 127) + " "
+
+print("AND with 127:", and_result)
+print("OR with 127:", or_result)
+print("XOR with 127:", xor_result)

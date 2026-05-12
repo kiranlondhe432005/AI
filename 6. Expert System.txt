@@ -1,0 +1,53 @@
+# Simple Expert System for Medical Diagnosis
+
+print("===== Medical Expert System =====\n")
+
+name = input("Enter patient name: ")
+
+print("\nAnswer with yes or no\n")
+
+fever = input("Do you have fever? ")
+cough = input("Do you have cough? ")
+headache = input("Do you have headache? ")
+cold = input("Do you have cold? ")
+stomach_pain = input("Do you have stomach pain? ")
+
+print("\n----- Result -----\n")
+
+# Disease checking
+
+if fever == "yes" and cough == "yes" and cold == "yes":
+    print(name, "may have Flu or Viral Infection.")
+
+elif fever == "yes" and headache == "yes":
+    print(name, "may have Fever.")
+
+elif stomach_pain == "yes":
+    print(name, "may have Stomach Infection.")
+
+elif cough == "yes":
+    print(name, "may have Throat Infection.")
+
+else:
+    print("Symptoms are unclear. Please consult a doctor.")
+
+
+/*
+===== Medical Expert System =====
+
+Enter patient name: sakshi
+
+Answer with yes or no
+
+Do you have fever? yes
+Do you have cough? yes
+Do you have headache? no
+Do you have cold? yes
+Do you have stomach pain? no
+
+----- Result -----
+
+sakshi may have Flu or Viral Infection.
+
+=== Code Execution Successful ===
+*/
